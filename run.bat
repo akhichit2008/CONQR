@@ -1,11 +1,51 @@
 @echo off
+setlocal
+
+where python >nul 2>nul
+if errorlevel 1 (
+  echo Python was not found on PATH. Install Python 3.11+ and try again.
+  pause
+  exit /b 1
+)
+
+where npm >nul 2>nul
+if errorlevel 1 (
+  echo Node.js was not found on PATH. Install Node.js and try again.
+  pause
+  exit /b 1
+)
+
 if not exist backend\.venv (
+  echo Creating Python virtual environment...
   python -m venv backend\.venv
 )
-call backend\.venv\Scripts\activate.bat && pip install -r backend\requirements.txt
+
+echo Installing backend dependencies...
+call backend\.venv\Scripts\activate.bat
+pip install -r backend\requirements.txt
+if errorlevel 1 (
+  echo Backend dependency install failed.
+  pause
+  exit /b 1
+)
+
+if not exist backend\.env (
+  echo Creating backend\.env from backend\.env.example...
+  copy backend\.env.example backend\.env >nul
+  echo Fill in GOOGLE_API_KEY in backend\.env before using AI features.
+)
 
 if not exist frontend\node_modules (
-  cd frontend && npm install && cd ..
+  echo Installing frontend dependencies...
+  pushd frontend
+  call npm install
+  if errorlevel 1 (
+    echo Frontend dependency install failed.
+    popd
+    pause
+    exit /b 1
+  )
+  popd
 )
 
 start "Conqr backend" cmd /k "cd backend && .venv\Scripts\activate.bat && uvicorn app.main:app --reload --port 8000"
