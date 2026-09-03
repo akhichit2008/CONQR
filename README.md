@@ -34,7 +34,28 @@ The result?
 
 ---
 
-# Our Solution
+## Platform (MVP) Workflow
+
+### Home Page
+<img width="1600" height="818" alt="1" src="https://github.com/user-attachments/assets/d12a7a8e-5cb6-4355-beb7-6823b24ca4b8" />
+
+<img width="1160" height="801" alt="2" src="https://github.com/user-attachments/assets/e8748b08-8971-4b7b-b283-23720df6617d" />
+
+### Campaign Page
+
+<img width="1600" height="808" alt="3" src="https://github.com/user-attachments/assets/21533004-a8bb-4315-a7f6-2419b757d838" />
+
+### Explore NGO Partners Page
+
+<img width="1600" height="805" alt="4" src="https://github.com/user-attachments/assets/930d0f39-f88b-4389-af36-38839c4abaf3" />
+
+
+### Comparative Analysis
+
+<img width="1600" height="809" alt="5" src="https://github.com/user-attachments/assets/05801c35-9aad-4e34-8cdb-76c2756fc5e7" />
+
+
+## Our Solution
 
 CONQR acts as an **intelligent matchmaking and decision-support layer** between corporations and NGOs.
 
