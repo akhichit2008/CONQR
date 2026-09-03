@@ -55,6 +55,11 @@ The result?
 <img width="1600" height="809" alt="5" src="https://github.com/user-attachments/assets/05801c35-9aad-4e34-8cdb-76c2756fc5e7" />
 
 
+### Platform Architecture
+
+<img width="661" height="706" alt="platform_architecture_features" src="https://github.com/user-attachments/assets/5575037f-0cf6-4324-a726-c436047bca08" />
+
+
 ## Our Solution
 
 CONQR acts as an **intelligent matchmaking and decision-support layer** between corporations and NGOs.
