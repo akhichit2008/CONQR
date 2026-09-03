@@ -1,4 +1,7 @@
-# CONQR
+<p align="center">
+       <img width="600" height="600" alt="CONQR-Logo-Design-Proposal" src="https://github.com/user-attachments/assets/a128189b-1bbd-4c49-81e4-8293c15f380d" />
+</p>
+
 
 ## Quick Start
 ```bash
@@ -37,8 +40,7 @@ The result?
 ## Platform (MVP) Workflow
 
 ### Home Page
-<img width="1600" height="818" alt="1" src="https://github.com/user-attachments/assets/d12a7a8e-5cb6-4355-beb7-6823b24ca4b8" />
-
+<img width="1600" height="824" alt="WhatsApp Image 2026-09-04 at 02 55 07" src="https://github.com/user-attachments/assets/a7a904ab-90ed-4805-a74d-d2d25807ba26" />
 <img width="1160" height="801" alt="2" src="https://github.com/user-attachments/assets/e8748b08-8971-4b7b-b283-23720df6617d" />
 
 ### Campaign Page
