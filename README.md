@@ -54,8 +54,12 @@ The result?
 
 ### Comparative Analysis
 
-<img width="1600" height="809" alt="5" src="https://github.com/user-attachments/assets/05801c35-9aad-4e34-8cdb-76c2756fc5e7" />
+<img width="807" height="762" alt="WhatsApp Image 2026-09-04 at 8 35 19 AM" src="https://github.com/user-attachments/assets/cc54a8f4-f7dd-4590-a3b2-21d9382ac26a" />
 
+
+### Evidence Score
+
+<img width="812" height="652" alt="image" src="https://github.com/user-attachments/assets/c16b2437-cf7a-44a2-8927-1ccd2b7a0b94" />
 
 ### Platform Architecture
 
