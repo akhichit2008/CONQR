@@ -14,6 +14,22 @@ class ComparisonField(BaseModel):
     matched: bool
 
 
+class EvidenceClaim(BaseModel):
+    category: str
+    label: str
+    confidence: float
+    source_count: int
+    independent_source_count: int
+    warning: str | None
+
+
+class EvidenceDNA(BaseModel):
+    confidence: float
+    label: str
+    claims: list[EvidenceClaim]
+    warnings: list[str]
+
+
 class NGOMatch(BaseModel):
     name: str
     match_score: float
@@ -26,6 +42,7 @@ class NGOMatch(BaseModel):
     phone: str
     address: str
     comparison: list[ComparisonField]
+    evidence: EvidenceDNA
 
 
 class MatchResponse(BaseModel):

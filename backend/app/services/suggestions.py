@@ -22,12 +22,13 @@ NGO under consideration: {ngo_name}
 - Capabilities: {capabilities}
 - Past projects: {past_projects}
 
-Give 3 short, concrete suggestions for the corporate team about this specific
-pairing. Each suggestion should be one sentence, actionable, and specific to
-this campaign and this NGO (what to verify, how to structure the partnership,
-what to ask about, or a gap worth checking). Do not restate the NGO's profile.
+Give exactly 5 short, concrete suggestions for the corporate team about this
+specific pairing. Each suggestion should be one sentence, actionable, and
+specific to this campaign and this NGO (what to verify, how to structure the
+partnership, what to ask about, or a gap worth checking). Do not restate the
+NGO's profile.
 
-Respond with a JSON array of 3 strings, nothing else."""
+Respond with a JSON array of exactly 5 strings, nothing else."""
 
 
 def generate_ngo_suggestions(requirement: dict, ngo: dict) -> list[str]:

@@ -5,12 +5,15 @@ from app.database import get_db
 from app.models.ngo import NGO
 from app.schemas.match import (
     ComparisonField,
+    EvidenceClaim,
+    EvidenceDNA,
     MatchRequest,
     MatchResponse,
     NGOMatch,
     SuggestionsRequest,
     SuggestionsResponse,
 )
+from app.services.evidence.scoring import score_ngo_evidence
 from app.services.matching.filter import filter_by_criteria, matches
 from app.services.matching.matchmaking import get_top_matches
 from app.services.matching.preprocessing import preprocess_requirement
@@ -60,6 +63,16 @@ def build_comparison(requirement: dict, ngo: dict) -> list[ComparisonField]:
     ]
 
 
+def build_evidence(ngo: dict) -> EvidenceDNA:
+    result = score_ngo_evidence(ngo)
+    return EvidenceDNA(
+        confidence=result["confidence"],
+        label=result["label"],
+        claims=[EvidenceClaim(**claim) for claim in result["claims"]],
+        warnings=result["warnings"],
+    )
+
+
 @router.post("", response_model=MatchResponse)
 def match_ngos(body: MatchRequest, db: Session = Depends(get_db)) -> MatchResponse:
     combined_text = (
@@ -79,6 +92,8 @@ def match_ngos(body: MatchRequest, db: Session = Depends(get_db)) -> MatchRespon
             "email": row.email,
             "phone": row.phone,
             "address": row.address,
+            "founded_year": row.founded_year,
+            "evidence": row.evidence,
         }
         for row in db.query(NGO).all()
     ]
@@ -101,6 +116,7 @@ def match_ngos(body: MatchRequest, db: Session = Depends(get_db)) -> MatchRespon
                 phone=match["phone"],
                 address=match["address"],
                 comparison=build_comparison(requirement, match),
+                evidence=build_evidence(match),
             )
             for match in top_matches
         ]
