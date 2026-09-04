@@ -1,13 +1,15 @@
 import type { PointerEvent } from "react";
+import type { LucideIcon } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import { GlassGlint } from "../ui/GlassGlint";
 
 interface StrategyCardProps {
+  icon: LucideIcon;
   title: string;
   description: string;
 }
 
-export function StrategyCard({ title, description }: StrategyCardProps) {
+export function StrategyCard({ icon: Icon, title, description }: StrategyCardProps) {
   const pointerX = useMotionValue("50%");
   const pointerY = useMotionValue("50%");
   const glareOpacity = useSpring(0, { stiffness: 200, damping: 24 });
@@ -29,7 +31,7 @@ export function StrategyCard({ title, description }: StrategyCardProps) {
 
   return (
     <div
-      className="relative rounded-xl"
+      className="relative h-full rounded-xl"
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
@@ -39,9 +41,10 @@ export function StrategyCard({ title, description }: StrategyCardProps) {
         className="pointer-events-none absolute inset-0 rounded-[inherit]"
         style={{ opacity: glareOpacity, background: glareBackground }}
       />
-      <div className="rounded-xl border border-white/10 bg-black/40 px-6 py-6 text-left backdrop-blur-md transition-colors duration-300 hover:border-white/20 hover:bg-black/30">
-        <h3 className="font-mono text-sm tracking-widest text-[#09C7C4]">{title}</h3>
-        <p className="mt-3 text-sm text-neutral-300">{description}</p>
+      <div className="h-full rounded-xl border border-white/10 bg-black/40 p-5 text-left backdrop-blur-md transition-colors duration-300 hover:border-white/20 hover:bg-black/30">
+        <Icon className="h-5 w-5 text-[#09C7C4]" />
+        <h3 className="mt-3 font-mono text-base tracking-wide text-neutral-100">{title}</h3>
+        <p className="mt-2 text-sm text-neutral-400">{description}</p>
       </div>
     </div>
   );

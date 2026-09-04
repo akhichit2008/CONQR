@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Glass } from "@samasante/liquid-glass";
 import { AuthButton } from "../auth/AuthButton";
+import { useAuth } from "../../hooks/useAuth";
 
 const hiddenTopBar = { y: -80, opacity: 0 };
 const visibleTopBar = { y: 0, opacity: 1 };
@@ -11,6 +12,8 @@ interface TopBarProps {
 }
 
 export function TopBar({ revealed = true }: TopBarProps) {
+  const { user } = useAuth();
+
   return (
     <motion.header
       initial={revealed ? visibleTopBar : hiddenTopBar}
@@ -44,6 +47,11 @@ export function TopBar({ revealed = true }: TopBarProps) {
             <Link to="/search" className="text-sm text-neutral-300 transition-colors hover:text-white">
               Campaign
             </Link>
+            {user && (
+              <Link to="/dashboard" className="text-sm text-neutral-300 transition-colors hover:text-white">
+                Profile
+              </Link>
+            )}
             <Link to="/about" className="text-sm text-neutral-300 transition-colors hover:text-white">
               About
             </Link>

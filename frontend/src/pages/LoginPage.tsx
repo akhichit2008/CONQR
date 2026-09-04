@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { LoginForm } from "../components/auth/LoginForm";
-import { TopBar } from "../components/layout/TopBar";
 import ShaderBackground from "../components/ui/shader-background";
 
 export function LoginPage() {
@@ -8,7 +7,6 @@ export function LoginPage() {
     <>
       <ShaderBackground />
       <main className="flex min-h-screen flex-col text-neutral-100">
-        <TopBar />
         <div className="flex flex-1 items-center justify-center px-6 py-24">
           <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-black/40 p-8 backdrop-blur-md">
             <h1 className="font-display text-3xl text-[#B29E88]">Sign in</h1>

@@ -138,10 +138,19 @@ function initShaderProgram(gl: WebGLRenderingContext, vertexSource: string, frag
   return shaderProgram;
 }
 
-export default function ShaderBackground() {
+interface ShaderBackgroundProps {
+  active?: boolean;
+}
+
+export default function ShaderBackground({ active = true }: ShaderBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Skip the WebGL setup and render loop entirely while inactive, so it
+    // isn't competing for the main thread with the loading screen's Lottie
+    // animation before this background is even visible.
+    if (!active) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -208,7 +217,7 @@ export default function ShaderBackground() {
       window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [active]);
 
   return <canvas ref={canvasRef} className="absolute top-0 left-0 -z-10 w-full" />;
 }

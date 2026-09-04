@@ -18,12 +18,12 @@ body {
 }
 
 /*
- * GlassGlint's rotating rim highlight. Built with border-image + conic-gradient
- * instead of the mask-composite "exclude" ring trick: that technique renders
- * correctly at rounded corners but produces nothing along straight edges in
- * this browser, which is exactly the artifact we hit on the wide TopBar.
- * border-image doesn't have that failure mode. @property lets the browser
- * interpolate --glint-angle smoothly instead of jumping between keyframes.
+ * GlassGlint's rotating rim highlight. A masked ring (padding-box content
+ * cut out of a border-box conic-gradient, mask-composite: exclude) instead
+ * of border-image: border-image ignores border-radius entirely and always
+ * renders square corners, which is exactly the artifact this replaced.
+ * @property lets the browser interpolate --glint-angle smoothly instead of
+ * jumping between keyframes.
  */
 @property --glint-angle {
   syntax: "<angle>";
@@ -38,25 +38,27 @@ body {
 }
 
 .glass-glint {
-  border: 3px solid transparent;
-  border-image: conic-gradient(
-      from var(--glint-angle),
-      transparent 0deg,
-      rgba(255, 255, 255, 0.3) 15deg,
-      rgba(255, 255, 255, 1) 35deg,
-      rgba(255, 255, 255, 0.3) 55deg,
-      transparent 80deg,
-      transparent 360deg
-    )
-    1;
+  padding: 3px;
+  background: conic-gradient(
+    from var(--glint-angle),
+    transparent 0deg,
+    rgba(255, 255, 255, 0.3) 15deg,
+    rgba(255, 255, 255, 1) 35deg,
+    rgba(255, 255, 255, 0.3) 55deg,
+    transparent 80deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
   animation: glint-rotate 30s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .glass-glint {
     animation: none;
-    border-image: none;
-    border-color: transparent;
+    background: none;
   }
 }
 

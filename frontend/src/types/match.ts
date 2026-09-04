@@ -11,6 +11,22 @@ export interface ComparisonField {
   matched: boolean;
 }
 
+export interface EvidenceClaim {
+  category: string;
+  label: string;
+  confidence: number;
+  sourceCount: number;
+  independentSourceCount: number;
+  warning: string | null;
+}
+
+export interface EvidenceDNA {
+  confidence: number;
+  label: string;
+  claims: EvidenceClaim[];
+  warnings: string[];
+}
+
 export interface NGOMatch {
   name: string;
   matchScore: number;
@@ -23,4 +39,5 @@ export interface NGOMatch {
   phone: string;
   address: string;
   comparison: ComparisonField[];
+  evidence: EvidenceDNA;
 }

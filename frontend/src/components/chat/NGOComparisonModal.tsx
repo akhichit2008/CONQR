@@ -2,6 +2,9 @@ import { Check, X } from "lucide-react";
 import type { MatchRequest, NGOMatch } from "../../types/match";
 import { Button } from "../ui/Button";
 import { Modal } from "../ui/Modal";
+import { evidenceConfidenceColor } from "./EvidenceClaimRow";
+import { EvidenceConfidencePanel } from "./EvidenceConfidencePanel";
+import { InvitePartnerButton } from "./InvitePartnerButton";
 import { NGOSuggestions } from "./NGOSuggestions";
 
 interface NGOComparisonModalProps {
@@ -18,7 +21,12 @@ export function NGOComparisonModal({ match, requirement, onClose }: NGOCompariso
   return (
     <Modal onClose={onClose}>
       <h2 className="font-display text-2xl text-[#B29E88]">{match.name}</h2>
-      <p className="mt-1 font-mono text-sm text-[#09C7C4]">{match.matchScore}% match</p>
+      <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-sm">
+        <span className="text-[#09C7C4]">{match.matchScore}% match</span>
+        <span style={{ color: evidenceConfidenceColor(match.evidence.confidence) }}>
+          {match.evidence.confidence}% evidence confidence
+        </span>
+      </div>
 
       <div className="mt-6 grid grid-cols-2 gap-3">
         <div className="rounded-lg border border-white/10 bg-black/40 p-3">
@@ -94,15 +102,20 @@ export function NGOComparisonModal({ match, requirement, onClose }: NGOCompariso
         ))}
       </div>
 
+      <EvidenceConfidencePanel evidence={match.evidence} />
+
       <div className="mt-6 border-t border-white/10 pt-4 text-sm text-neutral-400">
         <p>{match.email}</p>
         <p>{match.phone}</p>
         <p>{match.address}</p>
       </div>
 
-      <Button variant="secondary" className="mt-6 w-full">
-        Contact NGO
-      </Button>
+      <div className="mt-6 flex gap-3">
+        <Button variant="secondary" className="w-full">
+          Contact NGO
+        </Button>
+        <InvitePartnerButton match={match} requirement={requirement} />
+      </div>
 
       <NGOSuggestions match={match} requirement={requirement} />
     </Modal>
