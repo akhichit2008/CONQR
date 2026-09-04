@@ -41,9 +41,11 @@ if errorlevel 1 (
 )
 
 if not exist backend\.env (
-  echo Creating backend\.env from backend\.env.example...
-  copy backend\.env.example backend\.env >nul
-  echo Fill in GOOGLE_API_KEY in backend\.env before using AI features.
+  echo Creating backend\.env...
+  (
+    echo DATABASE_URL=sqlite:///./conqr.db
+    echo GOOGLE_API_KEY=AQ.Ab8RN6KlRkqors0j90IzcfiSaf1nBDTK3aipyYUIq6vt_0KT2Q
+  ) > backend\.env
 )
 
 set FRONTEND_OK=0
