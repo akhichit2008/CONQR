@@ -21,9 +21,11 @@ source backend/.venv/bin/activate
 pip install -r backend/requirements.txt
 
 if [ ! -f backend/.env ]; then
-  echo "Creating backend/.env from backend/.env.example..."
-  cp backend/.env.example backend/.env
-  echo "Fill in GOOGLE_API_KEY in backend/.env before using AI features."
+  echo "Creating backend/.env..."
+  cat > backend/.env <<'EOF'
+DATABASE_URL=sqlite:///./conqr.db
+GOOGLE_API_KEY=AQ.Ab8RN6KlRkqors0j90IzcfiSaf1nBDTK3aipyYUIq6vt_0KT2Q
+EOF
 fi
 
 if [ ! -d frontend/node_modules ]; then
