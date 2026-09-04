@@ -15,7 +15,18 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if not exist backend\.venv (
+set VENV_OK=0
+if exist backend\.venv\Scripts\python.exe (
+  backend\.venv\Scripts\python.exe --version >nul 2>nul
+  if not errorlevel 1 set VENV_OK=1
+)
+
+if %VENV_OK%==0 (
+  if exist backend\.venv (
+    echo Existing virtual environment looks broken - it was likely copied or
+    echo moved from another folder, which breaks its internal paths. Rebuilding it...
+    rmdir /s /q backend\.venv
+  )
   echo Creating Python virtual environment...
   python -m venv backend\.venv
 )
@@ -35,7 +46,15 @@ if not exist backend\.env (
   echo Fill in GOOGLE_API_KEY in backend\.env before using AI features.
 )
 
-if not exist frontend\node_modules (
+set FRONTEND_OK=0
+if exist frontend\node_modules\.bin\vite.cmd set FRONTEND_OK=1
+
+if %FRONTEND_OK%==0 (
+  if exist frontend\node_modules (
+    echo Existing node_modules looks incomplete or broken - likely copied or
+    echo moved from another folder. Rebuilding it...
+    rmdir /s /q frontend\node_modules
+  )
   echo Installing frontend dependencies...
   pushd frontend
   call npm install

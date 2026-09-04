@@ -1,0 +1,20 @@
+ValueError: No API key was provided. Please pass a valid API key. Learn how to create an API key at https://ai.google.dev/gemini-api/docs/api-key.
+Traceback (most recent call last):
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\app\api\match.py", line 123, in get_ngo_suggestions
+    suggestions = generate_ngo_suggestions(requirement, ngo)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\app\services\suggestions.py", line 48, in generate_ngo_suggestions
+    client = get_gemini_client()
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\app\services\gemini.py", line 11, in get_gemini_client
+    _client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\.venv\Lib\site-packages\google\genai\client.py", line 389, in __init__
+    self._api_client = self._get_api_client(
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\.venv\Lib\site-packages\google\genai\client.py", line 442, in _get_api_client
+    return BaseApiClient(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\Farriz J\Desktop\Recursion\backend\.venv\Lib\site-packages\google\genai\_api_client.py", line 834, in __init__
+    raise ValueError(
+ValueError: No API key was provided. Please pass a valid API key. Learn how to create an API key at https://ai.google.dev/gemini-api/docs/api-key.
