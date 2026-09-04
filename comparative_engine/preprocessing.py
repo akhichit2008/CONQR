@@ -67,7 +67,7 @@ def extract_duration(text):
 
     return value * 12 if "year" in unit else value
 
-def extract_categories(terms):
+def extract_categories(normalized_text):
     categories = {
         "expertise": [],
         "geography": [],
@@ -82,20 +82,28 @@ def extract_categories(terms):
 
     geography = {
         "tamil nadu", "karnataka", "kerala",
-        "maharashtra", "andhra pradesh", "telangana"
+        "maharashtra", "andhra pradesh", "telangana",
+        "delhi", "rajasthan", "gujarat",
+        "kenya", "uganda", "tanzania", "east africa"
     }
 
     beneficiaries = {
         "women", "children", "youth", "rural"
     }
 
-    for term in terms:
-        if term in expertise:
-            categories["expertise"].append(term)
-        elif term in geography:
-            categories["geography"].append(term)
-        elif term in beneficiaries:
-            categories["beneficiaries"].append(term)
+    # Match each canonical phrase against the full normalized text rather
+    # than against individually split words - a naive word-by-word check
+    # would never recognize multi-word phrases like "tamil nadu" or
+    # "digital literacy", since splitting on whitespace breaks them into
+    # tokens ("tamil", "nadu") that don't match the phrase on their own.
+    for category_name, vocabulary in (
+        ("expertise", expertise),
+        ("geography", geography),
+        ("beneficiaries", beneficiaries),
+    ):
+        for phrase in vocabulary:
+            if re.search(rf"\b{re.escape(phrase)}\b", normalized_text):
+                categories[category_name].append(phrase)
 
     return categories
 
@@ -103,7 +111,7 @@ def extract_categories(terms):
 def preprocess_requirement(text):
     normalized = normalize_keywords(text)
     terms = extract_terms(normalized)
-    categories = extract_categories(terms)
+    categories = extract_categories(normalized)
 
     return {
         "raw_text": text,

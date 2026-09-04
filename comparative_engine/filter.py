@@ -16,30 +16,35 @@ def matches(required, available):
     return bool(required & available)
 
 
-def is_eligible(ngo, requirement):
-    if not matches(
-        requirement.get("expertise"),
-        ngo.get("expertise")
-    ):
-        return False
+CRITERIA_FIELDS = {
+    "expertise": ("expertise", "expertise"),
+    "geography": ("geography", "regions"),
+    "beneficiaries": ("beneficiaries", "beneficiaries"),
+}
 
-    if not matches(
-        requirement.get("geography"),
-        ngo.get("regions")
-    ):
-        return False
 
-    if not matches(
-        requirement.get("beneficiaries"),
-        ngo.get("beneficiaries")
-    ):
-        return False
+def is_eligible_on(ngo, requirement, criteria):
+    for criterion in criteria:
+        requirement_key, ngo_key = CRITERIA_FIELDS[criterion]
+        if not matches(requirement.get(requirement_key), ngo.get(ngo_key)):
+            return False
 
     return True
+
+
+def is_eligible(ngo, requirement):
+    return is_eligible_on(ngo, requirement, CRITERIA_FIELDS.keys())
 
 
 def filter_eligible_ngos(ngos, requirement):
     return [
         ngo for ngo in ngos
         if is_eligible(ngo, requirement)
+    ]
+
+
+def filter_by_criteria(ngos, requirement, criteria):
+    return [
+        ngo for ngo in ngos
+        if is_eligible_on(ngo, requirement, criteria)
     ]

@@ -10,12 +10,37 @@ SYNONYMS = {
     "agriculture": ["farming", "farmer", "agri"],
     "environment": ["sustainability", "ecology", "conservation"],
     "sanitation": ["hygiene", "clean water", "waste management"],
-    "tamil nadu": ["tn"],
-    "karnataka": ["ka"],
-    "kerala": ["kl"],
-    "maharashtra": ["mh"],
-    "andhra pradesh": ["ap"],
-    "telangana": ["ts"]
+    "tamil nadu": [
+        "tn", "chennai", "coimbatore", "madurai", "tiruchirapalli", "trichy",
+        "salem", "tirunelveli", "erode", "vellore", "thanjavur", "tuticorin"
+    ],
+    "karnataka": [
+        "ka", "bangalore", "bengaluru", "mysore", "mysuru", "mangalore",
+        "hubli", "belgaum", "gulbarga", "davangere"
+    ],
+    "kerala": [
+        "kl", "kochi", "cochin", "thiruvananthapuram", "trivandrum",
+        "kozhikode", "calicut", "wayanad", "kottayam", "thrissur",
+        "kollam", "alappuzha", "palakkad", "idukki", "kannur"
+    ],
+    "maharashtra": [
+        "mh", "mumbai", "pune", "nagpur", "nashik", "aurangabad",
+        "thane", "solapur", "kolhapur", "ahmednagar"
+    ],
+    "andhra pradesh": [
+        "ap", "visakhapatnam", "vizag", "vijayawada", "guntur",
+        "tirupati", "nellore", "kurnool", "kadapa"
+    ],
+    "telangana": [
+        "ts", "hyderabad", "warangal", "nizamabad", "karimnagar", "khammam"
+    ],
+    "delhi": ["new delhi", "ncr", "delhi ncr"],
+    "rajasthan": ["jaipur", "udaipur", "jodhpur", "tilonia", "ajmer"],
+    "gujarat": ["ahmedabad", "surat", "vadodara", "rajkot", "gandhinagar"],
+    "kenya": ["nairobi", "mombasa", "kisumu"],
+    "uganda": ["kampala", "entebbe"],
+    "tanzania": ["dar es salaam", "arusha", "dodoma", "zanzibar"],
+    "east africa": ["eastern africa"]
 }
 
 STOPWORDS = {
